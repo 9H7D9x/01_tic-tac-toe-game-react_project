@@ -1,12 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 
-export default function Player ({intialName,symbol ,isActive})  {
+export default function Player ({intialName,symbol ,isActive ,onChangeName})  {
     const[isEditing , setIsEditing]=useState(false);
     const[playerName , setPlayerName]=useState(intialName);
 
-    function handleEditing(){
+    function handleEditClick(){
        setIsEditing((editing)=>!editing);
+       if(isEditing){ 
+        onChangeName(symbol,playerName);
+    }
+      
     }
 
     function handleChange(event){
@@ -25,7 +29,7 @@ export default function Player ({intialName,symbol ,isActive})  {
         {editPlayerName}
         <span className="player-symbol">{symbol}</span>
     </span>
-    <button onClick={handleEditing}> {isEditing? "Save":"Edit"} </button>
+    <button onClick={handleEditClick}> {isEditing? "Save":"Edit"} </button>
   </li> 
   
   )
